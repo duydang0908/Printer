@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="MÁY IN">
+        <PreferenceScreen
+            android:key="key_device"
+            android:summary="IP"
+            android:title="N/A"></PreferenceScreen>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="THIẾT LẬP VẬT LIỆU IN">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="Kích thước"
+            android:entries="@array/pref_size_entries"
+            android:entryValues="@array/pref_size_values"
+            android:key="key_size"
+            android:summary="9mm"
+            android:title="Kích thước" />
+
+    </PreferenceCategory>
+
+    <!--<PreferenceCategory android:title="TUỲ CHỌN IN">-->
+
+        <!--<CheckBoxPreference-->
+            <!--android:defaultValue="true"-->
+            <!--android:key="key_auto_cut"-->
+            <!--android:title="Cắt tự động" />-->
+        <!--<CheckBoxPreference-->
+            <!--android:defaultValue="true"-->
+            <!--android:key="key_half_cut"-->
+            <!--android:title="Cắt một nữa" />-->
+        <!--<CheckBoxPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="key_end_cut"-->
+            <!--android:title="In chuỗi" />-->
+        <!--<CheckBoxPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="key_special_tape_paper"-->
+            <!--android:title="Cuộn băng đặc biệt" />-->
+
+        <!--<EditTextPreference-->
+            <!--android:defaultValue="1"-->
+            <!--android:inputType="number"-->
+            <!--android:key="key_copies"-->
+            <!--android:summary="1"-->
+            <!--android:title="Bản sao" />-->
+    <!--</PreferenceCategory>-->
+
+</PreferenceScreen>

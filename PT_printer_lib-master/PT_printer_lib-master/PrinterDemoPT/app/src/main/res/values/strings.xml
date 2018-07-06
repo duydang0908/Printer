@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PrinterDemoPT</string>
+    <string-array name="names">
+        <!--<item>18 mm</item>-->
+        <item>24 mm</item>
+    </string-array>
+    <string-array name="names1">
+        <item>PT-P750W</item>
+        <item>PT-P900W</item>
+        <item>RJ-3050</item>
+    </string-array>
+    <string-array name="names2">
+        <item>label_template_1.html</item>
+        <item>label_template_2.html</item>
+        <item>label_template_3.html</item>
+        <item>label_template_4.html</item>
+        <item>label_template_5.html</item>
+    </string-array>
+</resources>
