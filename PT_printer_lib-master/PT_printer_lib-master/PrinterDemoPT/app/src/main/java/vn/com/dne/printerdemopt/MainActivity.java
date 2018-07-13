@@ -6,15 +6,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Picture;
+import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SizeF;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     EditText size;
     Spinner spinSize, spinPrinter, spinHTML;
     WebView wv;
-    ImageView iv;
+//    ImageView iv;
 
 
     @Override
@@ -57,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
         halfCut = (CheckBox) findViewById(R.id.chbxHalfCut);
         specialTape = (CheckBox) findViewById(R.id.chbxSpecialTape);
 
-
+        //Select size
         spinSize = (Spinner) findViewById(R.id.spinnerSize);
 
         ArrayAdapter<String> sizePrint = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.names));
         sizePrint.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinSize.setAdapter(sizePrint);
 
-
+        //Select printer
         spinPrinter = (Spinner) findViewById(R.id.spinnerPrinter);
 
         ArrayAdapter<String> printer = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.names1));
@@ -77,27 +81,27 @@ public class MainActivity extends AppCompatActivity {
         html.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinHTML.setAdapter(html);
 
+
+        //Load local HTML
         wv = (WebView) findViewById(R.id.webView);
-//        wv.getSettings().setJavaScriptEnabled(true);
-        wv.loadUrl("file:///android_asset/label_template_5.html");
+        //wv.getSettings().setJavaScriptEnabled(true);
+        //wv.loadUrl("file:///android_asset/label_template_5.html");
 
+        //wv.loadUrl("file:///android_asset/"+spinHTML.getSelectedItem().toString());
 
-//        wv.loadUrl("file:///android_asset/testthu.html");
-
-
-        //iv = (ImageView) findViewById(R.id.imageView);
-//        iv.setImageBitmap(getBitmapOfWebView(wv));
-
-//        spinHTML.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                wv.loadUrl("file:///android_asset/"+spinHTML.getSelectedItem().toString());
-//            }
-//        });
-//        setContentView(wv);
-
-
+        spinHTML.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                wv.loadUrl("file:///android_asset/" + spinHTML.getSelectedItem().toString());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+        //Set print button = false
         button.setEnabled(false);
+
 
         specialTape.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,16 +158,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        final Bitmap test = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-
-        //final Bitmap test = getBitmapOfWebView(wv);
+//        final Bitmap test = getBitmapOfWebView(wv);
 
 
 
 
+        //Print
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Bitmap test;
+                switch (spinHTML.getSelectedItem().toString()) {
+                    case "label_template_1.html":
+                        test = BitmapFactory.decodeResource(getResources(), R.drawable.a);
+                        break;
+                    case "label_template_2.html":
+                        test = BitmapFactory.decodeResource(getResources(), R.drawable.printest);
+                        break;
+                    case "label_template_3.html":
+                        test = BitmapFactory.decodeResource(getResources(), R.drawable.c);
+                        break;
+                    case "label_template_4.html":
+                        test = BitmapFactory.decodeResource(getResources(), R.drawable.d);
+                        break;
+                    default:
+                        test = BitmapFactory.decodeResource(getResources(), R.drawable.e);
+                        break;
+                }
                 //setup printer
                 printerManager.setModelName(spinPrinter.getSelectedItem().toString());
                 List<Device> list = printerManager.searchPrinter();
@@ -175,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 //    public Bitmap perform(Bitmap bitmap) {
 //        Bitmap bmOut = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
@@ -209,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         picture.draw(canvas);
         return bitmap;
     }
+
 
 }
 

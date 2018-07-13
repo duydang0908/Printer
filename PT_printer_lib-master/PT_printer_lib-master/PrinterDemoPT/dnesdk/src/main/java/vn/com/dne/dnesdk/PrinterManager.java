@@ -50,8 +50,6 @@ public class PrinterManager {
     }
 
 
-
-
     public static synchronized PrinterManager getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new PrinterManager(context);
@@ -169,7 +167,7 @@ public class PrinterManager {
             }
             try {
                 FileOutputStream out = new FileOutputStream(dest);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
                 out.flush();
                 out.close();
                 ((ImagePrint) myPrint).setURL(dest.getAbsolutePath());
